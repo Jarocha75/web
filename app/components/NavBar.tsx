@@ -1,8 +1,5 @@
-"use client"
-
 import Link from "next/link"
-import { useState } from "react"
-import { Menu } from "lucide-react"
+import Image from "next/image"
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -11,67 +8,26 @@ import {
   NavigationMenuTrigger,
   navigationMenuTriggerStyle,
 } from "./ui/navigation-menu"
-import { Sheet, SheetContent, SheetTrigger, SheetTitle } from "./ui/sheet"
-import { Button, buttonVariants } from "./ui/button"
+import { buttonVariants } from "./ui/button"
 import { cn } from "@/app/lib/utils"
-
-const produktyMenu = [
-  {
-    kategoria: "Okná",
-    href: "/produkty?kategoria=okna",
-    polozky: [
-      { label: "Plastové okná", href: "/produkty?kategoria=okna&typ=plasticke", popis: "Salamander, Rehau" },
-      { label: "Hliníkové okná", href: "/produkty?kategoria=okna&typ=hlinikove", popis: "Aluprof" },
-    ],
-  },
-  {
-    kategoria: "Dvere",
-    href: "/produkty?kategoria=dvere",
-    polozky: [
-      { label: "Interiérové dvere", href: "/produkty?kategoria=dvere&typ=interierove", popis: "Pre vnútorné priestory" },
-      { label: "Vchodové dvere", href: "/produkty?kategoria=dvere&typ=vchodove", popis: "Bezpečnosť a dizajn" },
-    ],
-  },
-  {
-    kategoria: "Garážové brány",
-    href: "/produkty?kategoria=garazove-brany",
-    polozky: [],
-  },
-  {
-    kategoria: "Doplnky",
-    href: "/produkty?kategoria=doplnky",
-    polozky: [
-      { label: "Parapety", href: "/produkty?kategoria=doplnky&typ=parapety", popis: "" },
-      { label: "Žalúzie", href: "/produkty?kategoria=doplnky&typ=zaluzie", popis: "" },
-      { label: "Sieťky proti hmyzu", href: "/produkty?kategoria=doplnky&typ=sietky", popis: "" },
-      { label: "Rolety", href: "/produkty?kategoria=doplnky&typ=rolety-hlinikove", popis: "Hliníkové a screenové" },
-    ],
-  },
-]
-
-const mobilneLinky = [
-  { href: "/", label: "O nás" },
-  { href: "/produkty?kategoria=okna&typ=plasticke", label: "Plastové okná" },
-  { href: "/produkty?kategoria=okna&typ=hlinikove", label: "Hliníkové okná" },
-  { href: "/produkty?kategoria=dvere&typ=interierove", label: "Interiérové dvere" },
-  { href: "/produkty?kategoria=dvere&typ=vchodove", label: "Vchodové dvere" },
-  { href: "/produkty?kategoria=garazove-brany", label: "Garážové brány" },
-  { href: "/produkty?kategoria=doplnky", label: "Doplnky" },
-]
+import { produktyMenu, mobilneLinky } from "@/app/data/navData"
+import MobileMenu from "./MobileMenu"
 
 export default function Navbar() {
-  const [open, setOpen] = useState(false)
-
   return (
     <nav className="sticky top-0 z-50 bg-white/95 backdrop-blur-md border-b border-gray-100 shadow-sm">
       <div className="max-w-7xl mx-auto px-6 h-20 grid grid-cols-3 items-center">
 
         {/* LOGO */}
-        <Link href="/" className="flex items-center gap-2">
-          {/* Logo sem pridáš neskôr */}
-          <span className="text-xl font-black tracking-tighter text-gray-900 uppercase">
-            Okná<span className="text-blue-600 font-light text-sm ml-1">Rasto</span>
-          </span>
+        <Link href="/" className="flex items-center">
+          <Image
+            src="/logo/VikoTrade - logo.jpg"
+            alt="VikoTrade logo"
+            width={140}
+            height={48}
+            style={{ width: "auto", height: "48px" }}
+            priority
+          />
         </Link>
 
         {/* DESKTOP MENU — stred */}
@@ -79,7 +35,7 @@ export default function Navbar() {
           <NavigationMenu>
             <NavigationMenuList>
               <NavigationMenuItem>
-                <Link href="/" className={cn(navigationMenuTriggerStyle(), "text-gray-700")}>
+                <Link href="/" className={cn(navigationMenuTriggerStyle(), "text-base font-semibold text-gray-700")}>
                   O nás
                 </Link>
               </NavigationMenuItem>
@@ -88,7 +44,7 @@ export default function Navbar() {
                 <NavigationMenuItem key={skupina.kategoria}>
                   {skupina.polozky.length > 0 ? (
                     <>
-                      <NavigationMenuTrigger className="text-gray-700">
+                      <NavigationMenuTrigger className="text-base font-semibold text-gray-700">
                         {skupina.kategoria}
                       </NavigationMenuTrigger>
                       <NavigationMenuContent>
@@ -99,7 +55,7 @@ export default function Navbar() {
                               href={item.href}
                               className="block rounded-md px-3 py-2 hover:bg-gray-50 group transition-colors"
                             >
-                              <div className="text-sm font-medium text-gray-800 group-hover:text-blue-600 transition-colors">
+                              <div className="text-sm font-medium text-gray-800 group-hover:text-red-600 transition-colors">
                                 {item.label}
                               </div>
                               {item.popis && (
@@ -111,7 +67,7 @@ export default function Navbar() {
                       </NavigationMenuContent>
                     </>
                   ) : (
-                    <Link href={skupina.href} className={cn(navigationMenuTriggerStyle(), "text-gray-700")}>
+                    <Link href={skupina.href} className={cn(navigationMenuTriggerStyle(), "text-base font-semibold text-gray-700")}>
                       {skupina.kategoria}
                     </Link>
                   )}
@@ -130,36 +86,7 @@ export default function Navbar() {
             Kontakt
           </Link>
 
-          <Sheet open={open} onOpenChange={setOpen}>
-            <SheetTrigger
-              render={<Button variant="ghost" size="icon" />}
-              className="md:hidden"
-            >
-              <Menu />
-            </SheetTrigger>
-            <SheetContent side="right">
-              <SheetTitle className="text-left">Menu</SheetTitle>
-              <div className="flex flex-col gap-4 mt-6 px-1">
-                {mobilneLinky.map((link) => (
-                  <Link
-                    key={link.href}
-                    href={link.href}
-                    onClick={() => setOpen(false)}
-                    className="text-base font-medium text-gray-700 hover:text-blue-600 transition-colors"
-                  >
-                    {link.label}
-                  </Link>
-                ))}
-                <Link
-                  href="/kontakt"
-                  onClick={() => setOpen(false)}
-                  className={cn(buttonVariants(), "mt-2")}
-                >
-                  Kontakt
-                </Link>
-              </div>
-            </SheetContent>
-          </Sheet>
+          <MobileMenu linky={mobilneLinky} />
         </div>
 
       </div>
