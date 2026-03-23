@@ -76,6 +76,20 @@ Vždy používaj `style={{ width: "auto", height: "Xpx" }}` alebo `style={{ widt
 
 ---
 
+## Konštanty v komponentoch
+
+Hardcodované hodnoty (cesty, rozmery, opakované CSS triedy) vyťahuj do konštánt na vrchol súboru:
+
+```ts
+const LOGO = { src: "...", alt: "...", width: 140, height: 48 } as const
+const HREFS = { home: "/", kontakt: "/kontakt" } as const
+const CX = { nav: "sticky top-0 ...", menuItem: cn(...) }
+```
+
+Pri `<Image {...spread} />` vždy explicitne pridaj `alt={...}` — linter nedokáže overiť `alt` cez spread a hlási warning.
+
+---
+
 ## Statické assets
 
 Logo: `public/logo/VikoTrade - logo.jpg`
