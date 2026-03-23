@@ -12,9 +12,8 @@ export default async function OknoDetail({
 
   // Opýtame sa Sanity na toto konkrétne okno
   const window = await client.fetch(
-    `*[_type == "window" && slug.current == $slug][0]{
+    `*[_type == "product" && slug.current == $slug][0]{
     title,
-    price,
     "vyrobca": vendor->name,
     gallery,
     description
@@ -39,6 +38,7 @@ export default async function OknoDetail({
             <WindowImage
               image={window.gallery[0]}
               alt={window.title}
+              className="w-full h-130 object-cover rounded-3xl"
             />
           ) : (
             <div className="w-full h-96 bg-gray-100 rounded-3xl flex items-center justify-center">
@@ -55,8 +55,8 @@ export default async function OknoDetail({
           <h1 className="text-5xl font-black text-gray-900 mt-2">
             {window.title}
           </h1>
-          <p className="text-4xl font-light text-green-600 mt-6">
-            {window.price} €
+          <p className="text-lg font-semibold text-green-600 mt-6 bg-green-50 px-5 py-3 rounded-2xl inline-block">
+            Cenová ponuka zadarmo
           </p>
 
           <div className="mt-10 pt-10 border-t border-gray-100">

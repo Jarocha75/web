@@ -21,6 +21,9 @@ export type Contact = {
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
+  heroTitle?: string;
+  heroSubtitle?: string;
+  formTitle?: string;
   company?: string;
   phone?: string;
   email?: string;
@@ -43,13 +46,23 @@ export type SanityImageAssetReference = {
   [internalGroqTypeReferenceTo]?: "sanity.imageAsset";
 };
 
-export type Window = {
+export type Product = {
   _id: string;
-  _type: "window";
+  _type: "product";
   _createdAt: string;
   _updatedAt: string;
   _rev: string;
   title?: string;
+  slug?: Slug;
+  category?: "okna" | "dvere" | "garazove-brany" | "doplnky";
+  subcategoryOkna?: "plasticke" | "hlinikove";
+  subcategoryDvere?: "interierove" | "vchodove";
+  subcategoryDoplnky?:
+    | "parapety"
+    | "zaluzie"
+    | "sietky"
+    | "rolety-hlinikove"
+    | "rolety-screenove";
   vendor?: ProviderReference;
   gallery?: Array<{
     asset?: SanityImageAssetReference;
@@ -77,14 +90,6 @@ export type Window = {
     _type: "block";
     _key: string;
   }>;
-  slug?: Slug;
-  price?: number;
-};
-
-export type Slug = {
-  _type: "slug";
-  current?: string;
-  source?: string;
 };
 
 export type SanityImageCrop = {
@@ -118,6 +123,12 @@ export type Provider = {
     _type: "image";
   };
   website?: string;
+};
+
+export type Slug = {
+  _type: "slug";
+  current?: string;
+  source?: string;
 };
 
 export type SanityImagePaletteSwatch = {
@@ -221,11 +232,11 @@ export type AllSanitySchemaTypes =
   | Contact
   | ProviderReference
   | SanityImageAssetReference
-  | Window
-  | Slug
+  | Product
   | SanityImageCrop
   | SanityImageHotspot
   | Provider
+  | Slug
   | SanityImagePaletteSwatch
   | SanityImagePalette
   | SanityImageDimensions
