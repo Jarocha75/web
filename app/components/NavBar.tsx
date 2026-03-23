@@ -35,7 +35,7 @@ const CX = {
   dropdownLink: "block rounded-md px-3 py-2 hover:bg-gray-50 group transition-colors",
   dropdownLabel: "text-base font-medium text-gray-800 group-hover:text-red-600 transition-colors",
   dropdownDesc: "text-sm text-gray-400",
-  kontaktBtn: "group/button hidden md:inline-flex shrink-0 items-center justify-center rounded-lg border border-transparent bg-primary text-primary-foreground bg-clip-padding text-sm font-medium whitespace-nowrap transition-all outline-none select-none focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50 active:translate-y-px disabled:pointer-events-none disabled:opacity-50 h-9 gap-1.5 px-4 [&_svg]:pointer-events-none [&_svg]:shrink-0",
+  kontaktBtn: "group/button hidden md:inline-flex shrink-0 items-center justify-center rounded-lg border border-transparent bg-primary text-primary-foreground bg-clip-padding text-sm font-medium whitespace-nowrap transition-all duration-200 outline-none select-none focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/50 active:translate-y-px disabled:pointer-events-none disabled:opacity-50 h-9 gap-1.5 px-4 [&_svg]:pointer-events-none [&_svg]:shrink-0 hover:scale-105 hover:bg-primary/85",
 }
 
 // — Komponent —
