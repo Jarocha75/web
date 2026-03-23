@@ -8,9 +8,25 @@ import { Button, buttonVariants } from "./ui/button"
 import { cn } from "@/app/lib/utils"
 import type { NavLink } from "@/app/data/navData"
 
+// — Konštanty —
+
+const HREFS = {
+  kontakt: "/kontakt",
+} as const
+
+const CX = {
+  linkList: "flex flex-col gap-4 mt-6 px-1",
+  link: "text-base font-semibold text-gray-700 hover:text-primary transition-colors",
+  kontaktBtn: "mt-2",
+}
+
+// — Typy —
+
 type Props = {
   linky: NavLink[]
 }
+
+// — Komponent —
 
 export default function MobileMenu({ linky }: Props) {
   const [open, setOpen] = useState(false)
@@ -25,21 +41,21 @@ export default function MobileMenu({ linky }: Props) {
       </SheetTrigger>
       <SheetContent side="right">
         <SheetTitle className="text-left">Menu</SheetTitle>
-        <div className="flex flex-col gap-4 mt-6 px-1">
+        <div className={CX.linkList}>
           {linky.map((link) => (
             <Link
               key={link.href}
               href={link.href}
               onClick={() => setOpen(false)}
-              className="text-base font-semibold text-gray-700 hover:text-red-600 transition-colors"
+              className={CX.link}
             >
               {link.label}
             </Link>
           ))}
           <Link
-            href="/kontakt"
+            href={HREFS.kontakt}
             onClick={() => setOpen(false)}
-            className={cn(buttonVariants(), "mt-2")}
+            className={cn(buttonVariants(), CX.kontaktBtn)}
           >
             Kontakt
           </Link>
