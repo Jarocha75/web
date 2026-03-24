@@ -9,8 +9,8 @@ import type { Product } from "../lib/sanity.types";
 const SALAMANDER_LOGO = {
   src: "/logo/salamander02.png",
   alt: "Salamander logo",
-  width: 160,
-  height: 48,
+  width: 937,
+  height: 273,
   style: { width: "auto", height: "48px" } as React.CSSProperties,
 } as const
 

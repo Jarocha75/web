@@ -64,15 +64,21 @@ Pravidlo: **dáta oddelené od komponentov**. Keď treba pridať/odstrániť kat
 
 ## Next.js Image
 
-Vždy používaj `style={{ width: "auto", height: "Xpx" }}` alebo `style={{ width: "Xpx", height: "auto" }}` — nie CSS triedy `h-X w-auto`, kvôli Next.js warningom o aspect ratio.
+`width` a `height` props musia byť **skutočné (intrinsic) rozmery súboru**, nie zobrazovaná veľkosť.
+CSS `style` ovláda zobrazenie. Varovanie "has either width or height modified" nastane, keď sa líši len jedna dimenzia (Next.js porovnáva `img.width` / `img.height` s HTML atribútmi).
 
 ```tsx
-// ✅ správne
+// ✅ správne — intrinsic rozmery súboru (napr. 614×233), CSS určuje zobrazenie
+<Image src="..." width={614} height={233} style={{ width: "auto", height: "48px" }} />
+
+// ❌ nesprávne — width/height nezodpovedajú súboru, len jedna dimenzia sa líši → warning
 <Image src="..." width={140} height={48} style={{ width: "auto", height: "48px" }} />
 
-// ❌ nesprávne
-<Image src="..." width={140} height={48} className="h-12 w-auto" />
+// ❌ nesprávne — CSS triedy namiesto style
+<Image src="..." width={614} height={233} className="h-12 w-auto" />
 ```
+
+Na zistenie intrinsic rozmerov: `sips -g pixelWidth -g pixelHeight public/logo/súbor.png`
 
 ---
 
